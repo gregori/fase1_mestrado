@@ -18,13 +18,34 @@
 
 #include "Pessoa.h"
 
-Pessoa::Pessoa(int diaN, int mesN, int anoN)
+Pessoa::Pessoa(int diaN, int mesN, int anoN, char *nomeN)
 {
     dia = diaN;
     mes = mesN;
     ano = anoN;
+
+    armazenaNome(nomeN);
 }
 
 void Pessoa::calculaIdade(int diaAtual, int mesAtual, int anoAtual)
 {
+    if (!(mes <= mesAtual && dia <= diaAtual))
+        anoAtual--;
 
+    idade = anoAtual - ano;
+}
+
+int Pessoa::informaIdade() // int getIdadE()
+{
+    return idade;
+}
+
+void Pessoa::imprimeIdade()
+{
+    printf("A idade de %s seria %d.\n", nome, idade);
+}
+
+void Pessoa::armazenaNome(char *nomeN)
+{
+    strcpy(nome, nomeN);
+}

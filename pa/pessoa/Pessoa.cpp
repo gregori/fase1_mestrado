@@ -17,12 +17,28 @@
  */
 
 #include "Pessoa.h"
+#include <string.h>
+#include <iostream>
+using std::cout;
+using std::endl;
 
 Pessoa::Pessoa(int diaN, int mesN, int anoN, char *nomeN)
+{
+    inicializa(diaN, mesN, anoN, nomeN);
+}
+
+Pessoa::Pessoa()
+{
+    inicializa(0, 0, 0);
+}
+
+Pessoa::inicializa(int diaN, int mesN, int anoN, char *nomeN)
 {
     dia = diaN;
     mes = mesN;
     ano = anoN;
+
+    idade = 0;
 
     armazenaNome(nomeN);
 }
@@ -42,7 +58,7 @@ int Pessoa::informaIdade() // int getIdadE()
 
 void Pessoa::imprimeIdade()
 {
-    printf("A idade de %s seria %d.\n", nome, idade);
+    cout << "A idade de " << nome << " seria " << idade << "." << endl;
 }
 
 void Pessoa::armazenaNome(char *nomeN)

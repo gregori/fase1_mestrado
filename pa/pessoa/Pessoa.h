@@ -17,9 +17,6 @@
  */
 
 
-#include <stdio.h>
-#include <string.h>
-
 class Pessoa
 {
     private:
@@ -31,6 +28,8 @@ class Pessoa
 
     public:
         Pessoa(int diaN, int mesN, int anoN, char *nomeN = "");
+        Pessoa();
+        void inicializa(int diaN, int mesN, int anoN, char *nomeN = "");
         void calculaIdade(int diaAtual, int mesAtual, int anoAtual);
         int informaIdade(); // int getIdade
         void imprimeIdade();

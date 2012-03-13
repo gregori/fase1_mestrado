@@ -1,5 +1,14 @@
-Pessoa.o:
-	g++ -o Pessoa.o -c Pessoa.cpp
+Pessoa: Pessoa.o main.o Principal.o
+	g++ -o Pessoa Pessoa.o main.o
 
-all: Pessoa.o
-	g++ -o Pessoa Pessoa.o main.cpp
+Principal.o:
+	g++ -c Principal.cpp
+
+Pessoa.o:
+	g++ -c Pessoa.cpp
+
+main.o:
+	g++ -c main.cpp
+
+clean:
+	rm Pessoa *.o

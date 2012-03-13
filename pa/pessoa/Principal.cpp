@@ -4,6 +4,7 @@ Principal::Principal()
 {
     Einstein.inicializa(14, 3, 1979, "Albert Einstein");
     Newton.inicializa(4, 1, 1643, "Isaac Newton");
+    Executar();
 }
 
 void Principal::Executar()

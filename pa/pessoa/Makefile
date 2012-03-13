@@ -1,5 +1,5 @@
 Pessoa: Pessoa.o main.o Principal.o
-	g++ -o Pessoa Pessoa.o main.o
+	g++ -o Pessoa Pessoa.o main.o Principal.o
 
 Principal.o:
 	g++ -c Principal.cpp

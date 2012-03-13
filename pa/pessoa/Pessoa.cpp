@@ -32,7 +32,7 @@ Pessoa::Pessoa()
     inicializa(0, 0, 0);
 }
 
-Pessoa::inicializa(int diaN, int mesN, int anoN, char *nomeN)
+void Pessoa::inicializa(int diaN, int mesN, int anoN, char *nomeN)
 {
     dia = diaN;
     mes = mesN;

@@ -70,23 +70,37 @@ void insert_last (struct list *list, int data)
    
 int remove_last (struct list *list)
 {
-   struct node *penultimate;
+   struct node *penultimate, *aux;
    int data;
 
    if (!empty_list(list))
    {
-      penultimate = list->first;
+      if (list->first->next == NULL)
+      {
+         data = list->first->data;
+         delete list->first;
+         list->last = list->first = NULL;
 
-      while (penultimate->next != list->last)
-         penultimate = penultimate->next;
+      }
+      else
+      {
+         penultimate = list->first;
 
-      // we found the penultimate element
-      penultimate->next = NULL; 
-      data = list->last->data;
-      delete list->last;
-      list->last = penultimate;
-      list->size--;
+         while (penultimate->next != NULL)
+         {
+            aux = penultimate;
+            penultimate = penultimate->next;
+         }
 
+         // we found the penultimate element
+         data = penultimate->data;
+         aux->next = NULL;
+         list->last = aux;
+         delete penultimate;
+         list->size--;
+
+      }
+      
       return data;
    }
    else 
@@ -109,6 +123,9 @@ int remove_first (struct list *list)
 
       delete aux;
       list->size--;
+
+      if (list->first == NULL)
+         list->last = NULL;
       
       return data;
    }

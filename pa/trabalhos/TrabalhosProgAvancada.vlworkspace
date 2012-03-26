@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<CodeLite_Workspace Database="./TrabalhosProgAvancada.tags" Name="TrabalhosProgAvancada">
+  <Project Active="Yes" Name="Pessoa" Path="Pessoa/Pessoa.vlproject"/>
+  <Project Active="No" Name="Exercicio1" Path="Exercicio1/Exercicio1.vlproject"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Project ConfigName="Debug" Name="Pessoa"/>
+      <Project ConfigName="Debug" Name="Exercicio1"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="no">
+      <Project ConfigName="Release" Name="Pessoa"/>
+      <Project ConfigName="Release" Name="Exercicio1"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>

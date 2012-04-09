@@ -21,41 +21,7 @@
 
 using namespace std;
 
-List::Node::Node(int d) {
-   data = d;
-   next = NULL;
-   prev = NULL;
-   size = 0;
-}
-
-List::Node::~Node() {
-   next = NULL;
-   prev = NULL;
-}
-
-void List::Node::setNext(List::Node *n) {
-   next = n;
-}
-
-void List::Node::setPrev(List::Node *p) {
-   prev = p;
-}
-
-List::Node* List::Node::getNext() {
-   return next;
-}
-
-List::Node* List::Node::getPrev() {
-   return prev;
-}
-
-void List::Node::setData(int d) {
-   data = d;
-}
-
-int List::Node::getData() {
-   return data;
-}
+namespace aed {
 
 List::List() {
    first = NULL;
@@ -63,30 +29,40 @@ List::List() {
 }
 
 List::~List() {
-   //TODO: Esvaziar lista
+    Node *aux, *aux2;
+
+    aux = first;
+    while(aux != NULL) {
+       aux2 = aux;
+       aux = aux->getNext();
+       delete aux2;
+    }
+
+    first = NULL;
+    last = NULL;
 }
 
-void List::setFirst(List::Node *f) {
+void List::setFirst(Node *f) {
    first = f;
 }
 
-List::Node* List::getFirst() {
+Node* List::getFirst() {
    return first;
 }
 
-void List::setLast(List::Node *l) {
+void List::setLast(Node *l) {
    last = l;
 }
 
-List::Node* List::getLast() {
+Node* List::getLast() {
    return last;
 }
 
 void List::insertFirst (int d) 
 {
-   List::Node *aux;
+   Node *aux;
 
-   aux = new List::Node(d);
+   aux = new Node(d);
 
    if (isEmpty())
       last = aux;
@@ -98,13 +74,13 @@ void List::insertFirst (int d)
 
 void List::insertLast (int d)
 {
-   List::Node *aux, *l;
+   Node *aux, *l;
 
    if (isEmpty())
       insertFirst(d);
    else
    {
-      aux = new List::Node(d);
+      aux = new Node(d);
       aux->setNext(NULL);
       l = getLast();
       l->setNext(aux);
@@ -113,9 +89,9 @@ void List::insertLast (int d)
    size++;
 }
 
-int List::removeLast ()
+int List::removeLast()
 {
-   List::Node *penultimate, *aux, *f;
+   Node *penultimate, *aux, *f;
    int d;
 
    if (!isEmpty())
@@ -156,7 +132,7 @@ int List::removeLast ()
     
 int List::removeFirst()
 {
-   List::Node *aux, *f;
+   Node *aux, *f;
    int d;
 
    if (!isEmpty())
@@ -189,25 +165,12 @@ int List::getSize() {
    return size;
 }
 
-void List::printList()
-{
-   List::Node *aux;
-   int i = 0;
+int List::getFirstData() {
+   return first->getData();
+}
 
-   if (isEmpty())
-      cout << "Lista vazia!" << endl;
-   else
-   {
-      cout << "Tamanho da lista: " << getSize() << endl;
-      cout << "Topo contém: " << first->getData() << endl;
-      cout << "Endereço do topo: " << first << endl;
+int List::getLastData() {
+   return last->getData();
+}
 
-      for (aux = first; aux != NULL; aux = aux->getNext())
-      {
-         cout << "Nó " << i++ << ": " << endl;
-         cout << "Endereço: " << aux;
-         cout << " Valor: " << aux->getData() << " End. próximo: " << aux->getNext << endl;
-         cout << "--------------------------------" << endl;
-      }
-   }
 }

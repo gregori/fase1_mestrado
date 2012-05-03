@@ -24,6 +24,7 @@ Note that this project is set to work with the GNU toolchain (gdb, g++)
     <File Name="PessoaJuridica.h"/>
     <File Name="Unidade.cpp"/>
     <File Name="Unidade.h"/>
+    <File Name="Estado.cpp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>

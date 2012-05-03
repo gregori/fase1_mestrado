@@ -55,4 +55,14 @@ Elemento<Tipo>* Elemento<Tipo>::informaAnterior()
     return anterior;
 }
 
-template
+template<class Tipo>
+void Elemento<Tipo>::adicionaInfo(Tipo* inf)
+{
+    info = inf;
+}
+
+template<class Tipo>
+Tipo* Elemento<Tipo>::informaInfo()
+{
+    return info;
+}

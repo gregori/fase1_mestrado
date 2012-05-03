@@ -28,13 +28,13 @@ public:
     bool eHomem();
     bool eMulher();
     Pessoa* informaConjuge();
-    void listaFilhos();
     void adicionaConjuge(Pessoa* conjuge);
     void adicionaFilho(Pessoa* filho);
     void adicionaGenitor(Pessoa* genitor);
     void adicionaEndereco(char* logradouro, int numero, char* complemento,
             int cep, Cidade* cidade, Estado* estado, Pais* pais);
     void adicionaEndereco(Endereco* enderecoP);
+    void listaFilhos();
 };
 
 

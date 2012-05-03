@@ -5,6 +5,7 @@
 using namespace std;
 
 Pessoa::Pessoa()
+: filhos()
 {
     nome = "";
     sexo = "";
@@ -12,11 +13,12 @@ Pessoa::Pessoa()
     mae = NULL;
     pai = NULL;
     endereco = NULL;
+    conjuge = NULL;
 }
 
 Pessoa::Pessoa(char* nomeP, char* sexoP, Data* dataNascimentoP, Pessoa* maeP,
         Pessoa* paiP, Endereco* enderecoP, Pessoa* conjugeP)
-: Filhos();
+: filhos()
 {
     strcpy(nome, nomeP);
     strcpy(sexo, sexoP);
@@ -35,27 +37,23 @@ Pessoa::~Pessoa()
     mae = NULL;
     pai = NULL;
     conjuge = NULL;
-    delete endereco;
+    endereco = NULL;
+    delete filhos;
 }
 
-Pessoa* Pessoa::informaConjuge()
+int Pessoa::calculaIdade(Data& dataAtual)
 {
-    return conjuge;
+    return dataNascimento.diferencaAnos(dataAtual);
+}
+
+bool Pessoa::temFilhos()
+{
+    return !(filhos.vazia());
 }
 
 bool Pessoa::temConjuge()
 {
     return conjuge != NULL;
-}
-
-void Pessoa::adicionaFilho(Pessoa* filho)
-{
-    filhos.adicionaInfo(filho);
-}
-
-bool Pessoa::temFilhos()
-{
-    return !(filhos.estaVazia());
 }
 
 bool Pessoa::eHomem()
@@ -68,9 +66,19 @@ bool Pessoa::eMulher()
     return (strcmp(sexo, "Feminino") == 0);
 }
 
-int Pessoa::calculaIdade(Data& dataAtual)
+Pessoa* Pessoa::informaConjuge()
 {
-    return dataNascimento.diferencaAnos(dataAtual);
+    return conjuge;
+}
+
+void Pessoa::adicionaConjuge(Pessoa* conjuge)
+{
+    this.conjuge = conjuge;
+}
+
+void Pessoa::adicionaFilho(Pessoa* filho)
+{
+    filhos.adicionaInfo(filho);
 }
 
 void Pessoa::adicionaGenitor(Pessoa* genitor)
@@ -91,4 +99,16 @@ void Pessoa::adicionaEndereco(char* logradouro, int numero, char* complemento,
 void Pessoa::adicionaEndereco(Endereco* enderecoP)
 {
     endereco = enderecoP;
+}
+
+void Pessoa::listaFilhos()
+{
+    if (filhos.vazia())
+        cout << "Não possui filhos!" << endl;
+    else
+        for(Elemento<Pessoa>* p = filhos.informaPrimeiro(); p = NULL; p = p->informaProximo())
+        {
+            Pessoa* filho = p->informaInfo();
+            cout << "Filho : " << filho->informaNome() << endl;
+        }
 }

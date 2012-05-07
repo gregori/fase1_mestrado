@@ -109,8 +109,8 @@ Main::removeNode (  )
     cin >> val;
 
     val = tree.remove(val);
-
-    cout << "Valor " << val << " removido!" << endl;
+    if (val >= 0)
+        cout << "Valor " << val << " removido!" << endl;
 }		/* -----  end of method Main::removeNode  ----- */
 
 

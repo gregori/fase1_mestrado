@@ -70,28 +70,36 @@ void Tree::insert(const int data)
 
 int Tree::remove(int data)
 {
-    Node *aux, *aux2, *aux3, *parent;
+    Node *aux, *aux2, *aux3, *parent = NULL;
 
-    int value;
+    int value, depth;
 
     if (isEmpty()) 
     {
-        cout << "Lista vazia!" << endl;
+        cout << "Árvore vazia!" << endl;
         return -1;
     }
 
     aux = root;
 
     // Finding the node and its parent
-    while (aux->getData() != data) 
+    while (aux != NULL && aux->getData() != data) 
     {
         parent = aux; // this is the parent node
         aux = aux->getChildFromValue(data);
     }
 
+    if (aux == NULL)
+    {
+        cout << "Elemento não encontrado!" << endl;
+        return -1;
+    }
+
     if (aux->isLeaf()) 
     { // leaf node
-        if (parent->getLeft() == aux)
+        if (aux == root && parent == NULL)
+           root = NULL;
+        else if (parent->getLeft() == aux)
             parent->setLeft(NULL);
         else
             parent->setRight(NULL);
@@ -99,24 +107,44 @@ int Tree::remove(int data)
     } 
     else if (aux->getRight() == NULL) 
     { // it has a left child
-        if (parent->getLeft() == aux)
+        if (aux == root)
+        {
+            root = aux->getLeft();
+            depth = 0;
+        }
+        else if (parent->getLeft() == aux)
+        {
             parent->setLeft(aux->getLeft());
+            depth = parent->getDepth()+1;
+        }
         else
+        {
             parent->setRight(aux->getLeft());
+            depth = parent->getDepth()+1;
+        }
 
-        aux->getLeft()->setDepth(parent->getDepth()+1);
+        aux->getLeft()->setDepth(depth);
         aux->getLeft()->setChildrenDepth();
     } 
     else if (aux->getLeft() == NULL) 
     { // it has a right child
-        if (parent->getLeft() == aux)
+        if (aux == root)
+        {
+           root = aux->getRight();
+           depth = 0;
+        }
+        else if (parent->getLeft() == aux)
+        {
             parent->setLeft(aux->getRight());
+            depth = parent->getDepth()+1;
+        }
         else
+        {
             parent->setRight(aux->getRight());
-
-        aux->getRight()->setDepth(parent->getDepth()+1);
+            depth = parent->getDepth()+1;
+        }
+        aux->getRight()->setDepth(depth);
         aux->getRight()->setChildrenDepth();
-
     } 
     else 
     { // node has 2 children
@@ -128,12 +156,23 @@ int Tree::remove(int data)
 
         aux2->setRight(aux->getRight());
 
-        if (parent->getLeft() == aux)
+        if (aux == root)
+        {
+           root = aux->getLeft();
+           depth = 0;
+        }
+        else if (parent->getLeft() == aux)
+        {
             parent->setLeft(aux->getLeft());
+            depth = parent->getDepth()+1;
+        }
         else
+        {
             parent->setRight(aux->getLeft());
+            depth = parent->getDepth()+1;
+        }
 
-        aux->getLeft()->setDepth(parent->getDepth()+1);
+        aux->getLeft()->setDepth(depth);
         aux->getLeft()->setChildrenDepth();
     }
 
